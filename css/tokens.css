@@ -1,0 +1,62 @@
+/* ===== Nogma × Aloha — Design tokens ===== */
+:root {
+  color-scheme: dark;
+
+  /* Superfícies */
+  --bg: #07080a;
+  --bg-2: #0b0d10;
+  --surface: #101216;
+  --surface-2: #14171c;
+  --surface-3: #1a1e25;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  /* Marca */
+  --lime: #ccff00;
+  --lime-hover: #b8e600;
+  --lime-dim: rgba(204, 255, 0, 0.12);
+  --lime-glow: rgba(204, 255, 0, 0.35);
+  --lime-glow-soft: rgba(204, 255, 0, 0.18);
+
+  /* Texto */
+  --text: #f3f4f6;
+  --text-2: #c3c8d1;
+  --muted: #8e96a4;
+  --muted-2: #5f6673;
+  --on-lime: #0a0b0d;
+
+  /* Estados */
+  --danger: #ff5c5c;
+  --danger-dim: rgba(255, 92, 92, 0.12);
+  --success: var(--lime);
+
+  /* Raios */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-btn: 14px;
+  --r-md: 18px;
+  --r-card: 24px;
+  --r-pill: 999px;
+
+  /* Tipografia */
+  --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Unbounded', var(--font);
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Movimento */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+  --dur-slow: 480ms;
+
+  /* Sombras */
+  --shadow-card: 0 24px 60px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border);
+  --shadow-lime: 0 0 0 1px rgba(204, 255, 0, 0.35), 0 12px 40px -12px var(--lime-glow);
+  --shadow-lime-lg: 0 0 60px -10px var(--lime-glow);
+
+  /* Layout */
+  --header-h: 68px;
+  --content-w: 52rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+}
