@@ -58,7 +58,15 @@
 .q-status { display: inline-flex; align-items: center; gap: .55rem; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .dot-live { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 10px var(--lime); }
 
-.pills { display: none; gap: .35rem; overflow-x: auto; padding: .15rem .1rem; flex: 1; justify-content: flex-end; scroll-snap-type: x proximity; }
+.pills {
+  display: none; gap: .35rem; overflow-x: auto; padding: .35rem .1rem .15rem; flex-basis: 100%;
+  justify-content: flex-start; scroll-snap-type: x proximity;
+  border-top: 1px solid var(--border); margin-top: .2rem;
+  mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent);
+}
+.pills::after { content: ""; flex: none; width: 1px; }
+.pills { scrollbar-width: none; }
+.pills::-webkit-scrollbar { display: none; }
 @media (min-width: 768px) { .pills { display: flex; } .q-drawer-btn { display: none; } }
 .pill {
   flex: none; width: 34px; height: 34px; border-radius: var(--r-pill); scroll-snap-align: center;
@@ -145,7 +153,8 @@
 .drawer-item.is-current .t { color: var(--text); }
 
 /* ---------- Revisão ---------- */
-.review-head { display: grid; gap: .7rem; margin-bottom: 1.4rem; }
+.review-head { display: grid; gap: .7rem; margin-bottom: 1.4rem; justify-items: start; }
+.review-head .review-bar { justify-self: stretch; }
 .review-title { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: clamp(1.7rem, 5vw, 2.6rem); letter-spacing: -.02em; line-height: 1.1; }
 .review-sub { margin: 0; color: var(--muted); }
 .review-bar { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: .9rem 1.1rem; margin-top: .4rem; }
@@ -210,3 +219,6 @@
 .done-summary .row span { color: var(--muted); }
 .done-summary .row strong { text-align: right; }
 .done-foot { margin: .5rem 0 0; color: var(--muted-2); font-size: 13px; }
+
+.q-pick-label { display: none; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+@media (min-width: 768px) { .q-pick-label { display: inline; } .q-topbar .q-status { margin-right: auto; } }
