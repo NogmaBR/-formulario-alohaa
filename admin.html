@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07080a">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Painel · Respostas Aloha · Nogma</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="bg-art" aria-hidden="true">
+    <img class="art-1" src="assets/curva-1.svg" alt="">
+    <img class="art-2" src="assets/curva-2.svg" alt="">
+  </div>
+
+  <header class="header">
+    <div class="brand">
+      <a href="admin.html" aria-label="Painel"><img src="assets/nogma-wordmark.png" alt="Nogma"></a>
+      <span class="badge"><span class="dot"></span>Painel de respostas</span>
+    </div>
+    <div class="admin-user" id="admin-user" hidden>
+      <span class="mono" id="admin-email"></span>
+      <button class="btn btn-ghost btn-sm" id="btn-logout">Sair</button>
+    </div>
+    <div class="brand-n" title="Nogma"><img src="assets/nogma-n.png" alt=""></div>
+  </header>
+
+  <main id="app" class="admin-main">
+
+    <!-- ========== LOGIN ========== -->
+    <section data-screen="login" class="screen" hidden>
+      <div class="card login-card">
+        <span class="card-tag"><img src="assets/nogma-n.png" alt=""> Acesso restrito</span>
+        <h1 class="login-title">Painel <span class="text-lime">Aloha</span></h1>
+        <p class="login-sub">Entre com o usuário da equipe Nogma para ver as respostas.</p>
+        <form id="form-login" novalidate>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input class="input" id="email" type="email" autocomplete="username" placeholder="voce@nogma.com.br" required>
+          </div>
+          <div class="field">
+            <label for="password">Senha</label>
+            <input class="input" id="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+          </div>
+          <p class="error" id="login-error" role="alert"></p>
+          <button type="submit" class="btn btn-primary btn-lg" id="btn-login">
+            <span id="btn-login-text">Entrar</span>
+            <svg class="arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+        </form>
+        <p class="login-config" id="login-config" hidden>⚠️ Supabase não configurado. Preencha <code>js/config.js</code>.</p>
+      </div>
+    </section>
+
+    <!-- ========== LISTA ========== -->
+    <section data-screen="lista" class="screen" hidden>
+      <header class="list-head">
+        <div>
+          <h1 class="list-title">Envios <span class="text-lime mono" id="list-total">0</span></h1>
+          <p class="list-sub">Respostas do formulário de onboarding do Agente de IA — Aloha Recovery.</p>
+        </div>
+        <div class="list-tools">
+          <label class="search">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M20 20l-3.5-3.5"/></svg>
+            <input type="search" id="search" placeholder="Buscar por nome ou cargo" autocomplete="off">
+          </label>
+          <button class="btn btn-ghost" id="btn-refresh" title="Atualizar">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5M5.5 9A7.5 7.5 0 0119 7.5M18.5 15A7.5 7.5 0 015 16.5"/></svg>
+            <span>Atualizar</span>
+          </button>
+          <button class="btn btn-primary" id="btn-csv">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>
+            <span>Exportar CSV</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="list-state" id="list-state" hidden></div>
+      <div class="entries" id="entries"></div>
+    </section>
+
+    <!-- ========== DETALHE ========== -->
+    <section data-screen="detalhe" class="screen" hidden>
+      <button class="btn-link back" id="btn-back">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Todos os envios
+      </button>
+
+      <header class="card detail-head">
+        <div class="detail-who">
+          <span class="avatar" id="d-avatar"></span>
+          <div>
+            <h1 class="detail-name" id="d-nome"></h1>
+            <p class="detail-meta"><span id="d-cargo"></span> · <span id="d-data"></span> · <span id="d-duracao"></span></p>
+          </div>
+        </div>
+        <div class="detail-tools">
+          <button class="btn btn-ghost btn-sm" id="btn-copy-md">Copiar Markdown</button>
+          <button class="btn btn-ghost btn-sm" id="btn-dl-md">Baixar .md</button>
+          <button class="btn btn-ghost btn-sm" id="btn-dl-json">Baixar .json</button>
+        </div>
+      </header>
+
+      <ol class="answers" id="answers"></ol>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span class="brand-mini"><img src="assets/nogma-wordmark.png" alt="Nogma"> © 2026 Nogma. Uso interno.</span>
+    <a href="index.html">Abrir formulário público →</a>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/admin/app.js"></script>
+</body>
+</html>
