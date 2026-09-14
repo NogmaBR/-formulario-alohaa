@@ -4,3 +4,6 @@ Thumbs.db
 *.log
 docs/referencia/PROPOSTA-EMPRESA/
 .playwright-mcp/
+
+# Design system de referência (não faz parte do site)
+Nogma Design System/
