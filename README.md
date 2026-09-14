@@ -8,7 +8,7 @@ que alimentam o Agente de IA da **Aloha Recovery**. As respostas são salvas no
 - `admin.html` — painel da Nogma (login, lista de envios, detalhe, exportar Markdown/CSV/JSON)
 - `admin.html?mock` — painel em modo demonstração com dados de exemplo (sem Supabase)
 
-Site 100% estático: HTML + CSS + JS puro, sem build. Roda no GitHub Pages.
+Site 100% estático: HTML + CSS + JS puro, sem build. Roda na Vercel (ou GitHub Pages).
 
 ---
 
@@ -39,18 +39,23 @@ export const SUPABASE_ANON_KEY = 'eyJhbGciOi...';
 > A anon key é pública por design. A segurança está nas políticas RLS do
 > `schema.sql`, não na chave.
 
-## 2. Publicar no GitHub Pages (gratuito)
+## 2. Publicar na Vercel (gratuito)
 
-1. Crie um repositório no GitHub e suba este projeto (`git push`).
-2. No repositório: **Settings → Pages → Build and deployment**:
-   - Source: **Deploy from a branch**
-   - Branch: **main** · Folder: **/ (root)** → **Save**
-3. Em 1–2 minutos o site fica disponível em
-   `https://<usuario>.github.io/<repositorio>/`.
-   - Formulário: `.../index.html` (ou só `/`)
-   - Painel: `.../admin.html`
+O projeto é estático, sem build — a Vercel serve os arquivos como estão.
 
-Mande o link do formulário para a Aloha. O painel é só para a Nogma.
+1. Acesse [vercel.com](https://vercel.com) e entre com a conta do GitHub (NogmaBR).
+2. **Add New → Project → Import** o repositório `NogmaBR/-formulario-alohaa`.
+3. Na tela de configuração:
+   - Framework Preset: **Other**
+   - Root Directory: `./` (padrão)
+   - Build Command: **deixe vazio** (desligue o override se aparecer)
+   - Output Directory: **deixe vazio**
+4. **Deploy**. Em ~30 s sai a URL `https://<projeto>.vercel.app`.
+   - Formulário: `https://<projeto>.vercel.app/`
+   - Painel: `https://<projeto>.vercel.app/admin.html`
+5. Todo `git push` na `main` gera um novo deploy automaticamente.
+
+> Alternativa: GitHub Pages também funciona (Settings → Pages → branch `main`, pasta `/`).
 
 ## 3. Rodar localmente
 
