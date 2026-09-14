@@ -2,6 +2,7 @@
 import { QUESTIONS, QUESTION_IDS, TOTAL_QUESTIONS } from '../questions.js';
 import { loadState, saveState, clearState, emptyState, hasProgress } from '../storage.js';
 import { isComplete } from '../progress.js';
+import { isConfigured } from '../config.js';
 import {
   showScreen, renderProgress, renderQuestion, renderCount, autoGrow, flashSaved,
   renderPills, renderReview, renderDone, toast,
@@ -194,16 +195,38 @@ $('#review-list').addEventListener('click', (e) => {
 
 $('#btn-submit').addEventListener('click', async () => {
   if (!isComplete(state.respostas, QUESTION_IDS)) return;
-  // Fase 2: envio real ao Supabase. Por ora apenas simula.
+  if (!isConfigured()) {
+    return toast('Envio ainda não configurado. Avise a equipe Nogma — suas respostas continuam salvas aqui.', 'error', 6000);
+  }
+
   const btn = $('#btn-submit');
+  const label = $('#btn-submit-text');
   btn.disabled = true;
-  $('#btn-submit-text').textContent = 'Enviando…';
-  console.log('[aloha-form] payload', { nome: state.nome, cargo: state.cargo, respostas: state.respostas });
-  await new Promise((r) => setTimeout(r, 600));
-  renderDone(state, { enviadoEm: Date.now() });
-  tela = 'enviado';
-  showScreen('enviado');
-  clearState();
+  label.textContent = 'Enviando…';
+
+  // só as 25 chaves oficiais, com texto aparado
+  const respostas = Object.fromEntries(QUESTION_IDS.map((id) => [id, (state.respostas[id] ?? '').trim()]));
+
+  try {
+    // import dinâmico: o formulário não depende do CDN do Supabase para funcionar
+    const { submitResponse } = await import('../supabase-client.js');
+    await submitResponse({
+      nome: state.nome,
+      cargo: state.cargo,
+      respostas,
+      duracao_seg: state.iniciadoEm ? Math.round((Date.now() - state.iniciadoEm) / 1000) : null,
+      user_agent: navigator.userAgent.slice(0, 300),
+    });
+    renderDone(state, { enviadoEm: Date.now() });
+    tela = 'enviado';
+    showScreen('enviado');
+    clearState();
+  } catch (err) {
+    console.error('[aloha-form] falha ao enviar', err);
+    toast('Não conseguimos enviar agora. Suas respostas continuam salvas aqui — tente de novo em instantes.', 'error', 6000);
+    btn.disabled = false;
+    label.textContent = 'Enviar formulário';
+  }
 });
 
 /* ---------- Atalho global: Enter na capa ---------- */
