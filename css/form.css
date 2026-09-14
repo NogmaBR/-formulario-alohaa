@@ -160,7 +160,7 @@
   font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--on-lime);
   width: 30px; height: 30px; border-radius: 999px; background: var(--lime); display: grid; place-items: center; margin-top: .1rem;
 }
-.review-item .q { font-size: 13px; font-weight: 700; color: var(--lime); letter-spacing: .01em; margin: .25rem 0 .35rem; line-height: 1.4; }
+.review-item .q { font-size: 13px; font-weight: 700; color: var(--text); letter-spacing: .01em; margin: .25rem 0 .35rem; line-height: 1.4; }
 .review-item .a {
   font-size: 15px; color: var(--text-2); white-space: pre-wrap; word-break: break-word; line-height: 1.55;
   position: relative; max-height: 9.5em; overflow: hidden;

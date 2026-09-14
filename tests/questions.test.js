@@ -20,7 +20,7 @@ test('toda pergunta tem título e placeholder não vazios', () => {
 });
 
 test('primeira e última perguntas batem com o formulário original', () => {
-  assert.match(QUESTIONS[0].titulo, /tom da Aloha/);
+  assert.match(QUESTIONS[0].titulo, /tom do Aloha/);
   assert.match(QUESTIONS[24].titulo, /nome do agente/);
   assert.match(QUESTIONS[25].titulo, /preocupa com a IA/);
   assert.match(QUESTIONS[26].titulo, /não perguntou/);

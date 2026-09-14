@@ -108,7 +108,7 @@ function renderEntries() {
   if (rows.length === 0) {
     state.hidden = false;
     state.className = 'list-state';
-    state.textContent = entries.length === 0 ? 'Nenhum envio ainda. Assim que a Aloha responder, aparece aqui.' : 'Nenhum envio encontrado para essa busca.';
+    state.textContent = entries.length === 0 ? 'Nenhum envio ainda. Assim que o Aloha responder, aparece aqui.' : 'Nenhum envio encontrado para essa busca.';
   } else {
     state.hidden = true;
   }

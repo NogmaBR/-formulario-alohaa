@@ -10,7 +10,7 @@
 export const QUESTIONS = [
   {
     id: 'q1',
-    titulo: 'Descreva o tom da Aloha em 3 ou 5 palavras.',
+    titulo: 'Descreva o tom do Aloha em 3 ou 5 palavras.',
     dica: 'Ex.: Jovem, Profissional, Descontraído',
     placeholder: 'Ex.: Acolhedor, jovem, direto, profissional…',
   },
@@ -140,7 +140,7 @@ export const QUESTIONS = [
   {
     id: 'q25',
     titulo: 'Qual deve ser o nome do agente (como ele se apresenta nas mensagens)?',
-    placeholder: 'Ex.: "Oi, eu sou a Lua, assistente da Aloha…"',
+    placeholder: 'Ex.: "Oi, eu sou a Lua, assistente do Aloha…"',
   },
   {
     id: 'q26',
@@ -151,7 +151,7 @@ export const QUESTIONS = [
   {
     id: 'q27',
     titulo: 'O que a gente não perguntou que você acha importante?',
-    dica: 'Qualquer detalhe do dia a dia da Aloha que o agente precise saber.',
+    dica: 'Qualquer detalhe do dia a dia do Aloha que o agente precise saber.',
     placeholder: 'Fique à vontade — tudo ajuda a deixar o agente mais preciso.',
   },
 ];
