@@ -7,3 +7,5 @@ docs/referencia/PROPOSTA-EMPRESA/
 
 # Design system de referência (não faz parte do site)
 Nogma Design System/
+.env
+.env.*
