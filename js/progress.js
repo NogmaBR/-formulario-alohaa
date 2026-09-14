@@ -1,6 +1,8 @@
 // Lógica pura de progresso/completude. Sem DOM, sem side effects.
 
-export const TOTAL = 25;
+import { TOTAL_QUESTIONS } from './questions.js';
+
+export const TOTAL = TOTAL_QUESTIONS;
 
 /** Uma resposta conta como dada quando tem algo além de espaços. */
 export const isAnswered = (t) => typeof t === 'string' && t.trim().length > 0;

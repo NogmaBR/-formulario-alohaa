@@ -204,7 +204,7 @@ $('#btn-submit').addEventListener('click', async () => {
   btn.disabled = true;
   label.textContent = 'Enviando…';
 
-  // só as 25 chaves oficiais, com texto aparado
+  // só as chaves oficiais, com texto aparado
   const respostas = Object.fromEntries(QUESTION_IDS.map((id) => [id, (state.respostas[id] ?? '').trim()]));
 
   try {

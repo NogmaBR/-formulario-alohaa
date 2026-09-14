@@ -12,14 +12,14 @@ const row = {
   respostas: Object.fromEntries(QUESTIONS.map((q, i) => [q.id, `Resposta ${i + 1}`])),
 };
 
-test('toMarkdown traz cabeçalho e as 25 seções na ordem', () => {
+test('toMarkdown traz cabeçalho e as 27 seções na ordem', () => {
   const md = toMarkdown(row, QUESTIONS);
   assert.match(md, /^# Aloha Recovery — Respostas/);
   assert.match(md, /\*\*Nome:\*\* Ana Souza/);
   assert.match(md, /\*\*Cargo:\*\* Sócia/);
   const headings = [...md.matchAll(/^## (\d+)\. /gm)].map((m) => Number(m[1]));
-  assert.deepEqual(headings, Array.from({ length: 25 }, (_, i) => i + 1));
-  assert.ok(md.indexOf('Resposta 1') < md.indexOf('Resposta 25'));
+  assert.deepEqual(headings, Array.from({ length: 27 }, (_, i) => i + 1));
+  assert.ok(md.indexOf('Resposta 1') < md.indexOf('Resposta 27'));
 });
 
 test('toMarkdown marca resposta vazia', () => {

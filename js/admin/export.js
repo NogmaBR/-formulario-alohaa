@@ -38,7 +38,7 @@ export function csvCell(v) {
   return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
-/** Todos os envios em CSV: metadados + q1..q25. */
+/** Todos os envios em CSV: metadados + q1..qN. */
 export function toCSV(rows, questions) {
   const header = ['id', 'created_at', 'nome', 'cargo', 'duracao_seg', ...questions.map((q) => q.id)];
   const lines = rows.map((r) => [

@@ -1,5 +1,5 @@
 // Painel admin: login (Supabase Auth), lista de envios e detalhe com exportações.
-import { QUESTIONS } from '../questions.js';
+import { QUESTIONS, TOTAL_QUESTIONS } from '../questions.js';
 import { isConfigured } from '../config.js';
 import { toMarkdown, toCSV, download, slug, fmtDuration } from './export.js';
 
@@ -124,7 +124,7 @@ function renderEntries() {
       ),
       h('div', { class: 'entry-meta' },
         h('span', { class: 'mono' }, fmtDate(r.created_at)),
-        h('span', { class: 'chip' }, `25/25 · ${fmtDuration(r.duracao_seg)}`),
+        h('span', { class: 'chip' }, `${TOTAL_QUESTIONS}/${TOTAL_QUESTIONS} · ${fmtDuration(r.duracao_seg)}`),
       ),
     ),
   ));

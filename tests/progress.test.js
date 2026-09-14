@@ -1,8 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isAnswered, answeredCount, percent, missingIds, isComplete } from '../js/progress.js';
+import { TOTAL, isAnswered, answeredCount, percent, missingIds, isComplete } from '../js/progress.js';
 
-const IDS = Array.from({ length: 25 }, (_, i) => `q${i + 1}`);
+const IDS = Array.from({ length: 27 }, (_, i) => `q${i + 1}`);
 const fill = (n) => Object.fromEntries(IDS.slice(0, n).map((id) => [id, `resposta ${id}`]));
 
 test('isAnswered ignora espaços e valores não-string', () => {
@@ -20,10 +20,11 @@ test('answeredCount conta só respostas preenchidas', () => {
   assert.equal(answeredCount(undefined), 0);
 });
 
-test('percent é arredondado sobre 25', () => {
-  assert.equal(percent(fill(5)), 20);
+test('percent é arredondado sobre o total de perguntas (27)', () => {
+  assert.equal(TOTAL, 27);
+  assert.equal(percent(fill(9)), 33);
   assert.equal(percent(fill(0)), 0);
-  assert.equal(percent(fill(25)), 100);
+  assert.equal(percent(fill(27)), 100);
   assert.equal(percent(fill(1)), 4);
 });
 
@@ -34,6 +35,6 @@ test('missingIds devolve os ids faltantes na ordem', () => {
 });
 
 test('isComplete só com todas respondidas', () => {
-  assert.equal(isComplete(fill(24), IDS), false);
-  assert.equal(isComplete(fill(25), IDS), true);
+  assert.equal(isComplete(fill(26), IDS), false);
+  assert.equal(isComplete(fill(27), IDS), true);
 });

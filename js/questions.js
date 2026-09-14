@@ -1,5 +1,6 @@
-// As 25 perguntas do formulário Aloha Recovery, na ordem exata do original.
-// Fonte: docs/referencia/FORMMULARIO/Aloha Recovery - Google Formulários.pdf
+// As perguntas do formulário Aloha Recovery.
+// q1..q25 na ordem exata do original (docs/referencia/FORMMULARIO/...pdf);
+// q26 e q27 adicionadas pela Nogma.
 //
 // { id, titulo, dica?, placeholder }
 //  - titulo: a pergunta, como no formulário original
@@ -140,6 +141,18 @@ export const QUESTIONS = [
     id: 'q25',
     titulo: 'Qual deve ser o nome do agente (como ele se apresenta nas mensagens)?',
     placeholder: 'Ex.: "Oi, eu sou a Lua, assistente da Aloha…"',
+  },
+  {
+    id: 'q26',
+    titulo: 'O que te preocupa com a IA no atendimento?',
+    dica: 'Receios, limites, situações em que o agente não deve agir sozinho.',
+    placeholder: 'Ex.: tom robótico, informar preço errado, não saber quando chamar uma pessoa…',
+  },
+  {
+    id: 'q27',
+    titulo: 'O que a gente não perguntou que você acha importante?',
+    dica: 'Qualquer detalhe do dia a dia da Aloha que o agente precise saber.',
+    placeholder: 'Fique à vontade — tudo ajuda a deixar o agente mais preciso.',
   },
 ];
 

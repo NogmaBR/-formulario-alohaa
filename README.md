@@ -1,10 +1,10 @@
 # Formulário Aloha Recovery · Nogma
 
-Formulário interativo (web + mobile) de 25 perguntas que coleta as informações
+Formulário interativo (web + mobile) de 27 perguntas que coleta as informações
 que alimentam o Agente de IA da **Aloha Recovery**. As respostas são salvas no
 **Supabase** e a equipe Nogma acessa tudo pelo **painel admin**.
 
-- `index.html` — formulário público (capa → identificação → 25 perguntas → revisão → enviado)
+- `index.html` — formulário público (capa → identificação → 27 perguntas → revisão → enviado)
 - `admin.html` — painel da Nogma (login, lista de envios, detalhe, exportar Markdown/CSV/JSON)
 - `admin.html?mock` — painel em modo demonstração com dados de exemplo (sem Supabase)
 
@@ -84,7 +84,7 @@ css/   tokens.css  base.css  form.css  admin.css
 js/    config.js  questions.js  progress.js  storage.js  supabase-client.js
        form/app.js  form/render.js
        admin/app.js  admin/export.js  admin/mock-client.js
-assets/     logos e grafismos da Nogma
+assets/     logos da Nogma
 supabase/   schema.sql
 tests/      testes node --test
 docs/       spec, plano e materiais de referência
@@ -96,10 +96,10 @@ docs/       spec, plano e materiais de referência
   o navegador? Ao voltar, a capa oferece "Continuar de onde parei".
 - **Navegação**: Voltar/Próximo, pílulas numeradas (desktop) ou drawer
   "Escolher questão" (mobile), `Ctrl/Cmd + Enter` avança.
-- **Revisão**: mostra as 25 respostas; as vazias ficam em vermelho com botão
-  "Responder". O envio só libera com 25/25.
+- **Revisão**: mostra as 27 respostas; as vazias ficam em vermelho com botão
+  "Responder". O envio só libera com 27/27.
 - **Envio**: um único `INSERT` na tabela `respostas`. Se falhar (sem internet),
   nada se perde — a pessoa tenta de novo.
-- **Painel**: lista por data, busca por nome/cargo, detalhe com as 25
+- **Painel**: lista por data, busca por nome/cargo, detalhe com as 27
   respostas, **Copiar Markdown** (pronto para virar contexto do agente),
   **Baixar .md / .json**, **Exportar CSV** de todos os envios.

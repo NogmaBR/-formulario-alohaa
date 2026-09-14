@@ -17,12 +17,8 @@
   <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
-  <!-- Atmosfera: mesh + grão + curvas da marca -->
-  <div class="bg-art" aria-hidden="true">
-    <img class="art-1" src="assets/curva-1.svg" alt="">
-    <img class="art-2" src="assets/curva-2.svg" alt="">
-    <img class="art-3" src="assets/curva-3.svg" alt="">
-  </div>
+  <!-- Atmosfera: mesh + grão -->
+  <div class="bg-art" aria-hidden="true"></div>
 
   <header class="header">
     <div class="brand">
@@ -55,12 +51,6 @@
         Este formulário coleta as informações que vão alimentar o <strong>Agente de IA</strong> da Aloha Recovery.
         Uma pergunta por vez, no seu ritmo — tudo fica salvo automaticamente.
       </p>
-
-      <div class="hero-stats">
-        <div class="stat"><strong class="text-lime">25</strong><span>Perguntas</span></div>
-        <div class="stat"><strong>~15</strong><span>Minutos</span></div>
-        <div class="stat"><strong class="text-lime">Auto</strong><span>Salvamento</span></div>
-      </div>
 
       <div class="hero-cta">
         <button class="btn btn-primary btn-lg" id="btn-start">
@@ -110,7 +100,7 @@
       <div class="q-topbar">
         <div class="q-status">
           <span class="dot-live"></span>
-          <span id="q-badge" class="mono">Questão 1 de 25</span>
+          <span id="q-badge" class="mono">Questão 1 de 27</span>
         </div>
         <button class="btn btn-ghost btn-sm q-drawer-btn" id="btn-drawer" aria-haspopup="dialog" aria-controls="drawer">
           Escolher questão
@@ -169,7 +159,7 @@
         <p class="review-sub">Confira se está tudo certo antes de enviar. Você pode editar qualquer resposta.</p>
         <div class="review-bar card">
           <div class="review-bar-text">
-            <strong id="review-count" class="mono">0/25</strong>
+            <strong id="review-count" class="mono">0/27</strong>
             <span>respondidas</span>
           </div>
           <div class="progress-track"><div class="progress-bar" id="review-progress"></div></div>
