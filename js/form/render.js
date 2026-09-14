@@ -71,7 +71,7 @@ export function showScreen(name) {
 /* ---------- Progresso (header) ---------- */
 export function renderProgress(state) {
   const p = percent(state.respostas);
-  el.progressBar().style.width = `${p}%`;
+  el.progressBar().style.transform = `scaleX(${p / 100})`;
   el.progressText().textContent = `${p}% concluído`;
   el.progressTrack().setAttribute('aria-valuenow', String(p));
 }
@@ -196,7 +196,7 @@ export function renderReview(state) {
   });
 
   el.reviewCount().textContent = `${done}/${TOTAL_QUESTIONS}`;
-  el.reviewProgress().style.width = `${percent(state.respostas)}%`;
+  el.reviewProgress().style.transform = `scaleX(${percent(state.respostas) / 100})`;
   const rm = el.reviewMissing();
   rm.hidden = missing.length === 0;
   rm.textContent = missing.length === 1 ? 'Falta 1 resposta' : `Faltam ${missing.length} respostas`;

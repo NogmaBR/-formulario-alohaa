@@ -88,10 +88,11 @@ a:hover { text-decoration: underline; }
   background: rgba(255,255,255,.07); border: 1px solid var(--border); padding: 1px; overflow: hidden;
 }
 .progress-bar {
-  height: 100%; width: 0%; border-radius: 999px;
+  height: 100%; width: 100%; border-radius: 999px;
   background: linear-gradient(90deg, #a6d400, var(--lime));
   box-shadow: 0 0 12px var(--lime-glow);
-  transition: width var(--dur-slow) var(--ease);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform var(--dur-slow) var(--ease);
 }
 
 /* ===== Main / footer ===== */
