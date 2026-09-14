@@ -95,7 +95,8 @@ a:hover { text-decoration: underline; }
 }
 
 /* ===== Main / footer ===== */
-main { position: relative; z-index: 1; width: 100%; max-width: var(--content-w); margin: 0 auto; padding: clamp(1.25rem, 4vw, 3rem) var(--gutter); }
+body > * { min-width: 0; } /* itens do grid não podem estourar a coluna */
+main { position: relative; z-index: 1; width: 100%; min-width: 0; max-width: var(--content-w); margin: 0 auto; padding: clamp(1.25rem, 4vw, 3rem) var(--gutter); }
 .footer {
   position: relative; z-index: 1;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem;

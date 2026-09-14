@@ -50,6 +50,7 @@
 
 /* ---------- Pergunta ---------- */
 .q-topbar {
+  min-width: 0;
   display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap;
   padding: .7rem .9rem; margin-bottom: 1.1rem;
   background: rgba(18,20,24,.85); border: 1px solid var(--border); border-radius: var(--r-md);
@@ -59,7 +60,7 @@
 .dot-live { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 10px var(--lime); }
 
 .pills {
-  display: none; gap: .35rem; overflow-x: auto; padding: .35rem .1rem .15rem; flex-basis: 100%;
+  display: none; gap: .35rem; overflow-x: auto; padding: .35rem .1rem .15rem; flex-basis: 100%; min-width: 0; max-width: 100%;
   justify-content: flex-start; scroll-snap-type: x proximity;
   border-top: 1px solid var(--border); margin-top: .2rem;
   mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent);
