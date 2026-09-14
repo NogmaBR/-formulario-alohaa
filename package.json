@@ -1,0 +1,10 @@
+{
+  "name": "formulario-aloha",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Formulário interativo Aloha Recovery — Nogma",
+  "scripts": {
+    "test": "node --test tests/"
+  }
+}

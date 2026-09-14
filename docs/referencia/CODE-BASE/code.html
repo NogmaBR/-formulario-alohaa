@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nogma - Formulário Interativo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            nogma: {
+              lime: '#ccff00',
+              limeDark: '#a6d400',
+              dark: '#0a0b0d',
+              card: '#121418',
+              cardBorder: '#23272f',
+              muted: '#8e96a4'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #07080a;
+      color: #f3f4f6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    .neon-glow {
+      box-shadow: 0 0 25px -5px rgba(204, 255, 0, 0.35);
+    }
+    .neon-glow-lg {
+      box-shadow: 0 0 45px -8px rgba(204, 255, 0, 0.4);
+    }
+    .neon-border:focus {
+      border-color: #ccff00;
+      box-shadow: 0 0 15px rgba(204, 255, 0, 0.25);
+    }
+    .mesh-gradient {
+      background: radial-gradient(circle at 50% 20%, rgba(204, 255, 0, 0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 90% 80%, rgba(204, 255, 0, 0.04) 0%, transparent 40%),
+                  radial-gradient(circle at 10% 90%, rgba(20, 24, 30, 0.8) 0%, transparent 50%);
+    }
+    /* Animações suaves de transição */
+    .fade-enter {
+      animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .float-slow {
+      animation: floating 8s ease-in-out infinite alternate;
+    }
+    .float-reverse {
+      animation: floatingReverse 10s ease-in-out infinite alternate;
+    }
+    @keyframes floating {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-16px) rotate(3deg); }
+    }
+    @keyframes floatingReverse {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(18px) rotate(-4deg); }
+    }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between selection:bg-[#ccff00] selection:text-black">
+
+  <!-- Elementos decorativos de conexão de fundo (Logos & Grafismos Nogma) -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute inset-0 mesh-gradient"></div>
+    
+    <!-- Conexão 1 (Topo esquerdo) -->
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBtjlKMrCXC5mwXQdxLqPp0ANcbmIYMHfxGVG5HghHdKIc1BLMDq1gNEtJbl58GmSEn3Ei73TBvA6jqiiXdyGTigUnBJd2lXyfEDDT8Jr6cnsmtn0_Ed14fFkGLwn-dvruyzRt8S7P-gxybhWHeOhoKoiBVwwMhNaYQ5HkCn0OQXL4BH2_0GfJLcgHYuNvMX61YTpHJ3rHYGyfcdtyPmt7L8Od6OTuwuhtHMd4UatUDNFRigfG6yOPjeEX6gxMuFXioA" alt="Conexão decorativa" class="absolute -top-12 -left-14 w-64 md:w-80 opacity-20 filter drop-shadow-[0_0_15px_rgba(204,255,0,0.3)] float-slow pointer-events-none select-none">
+    
+    <!-- Conexão 2 (Direita meio) -->
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2q13JP1AhsI5cHYFUGOI4dADtq8Vh48_Oqabc_dsqv4WHzPNJbiVJALEMBQUKeI4nhhwjTsvmMp4rsgFwajikY0Iryv2P8E49wNgbWYGs9eV3n06-F8r2BYFoh3cuBH4CVx1F3-yMkB2RIBil0DJtuCvwt_hJUIxpQgUEKeq45x30d_48QggNtpApf-LDAcRVnOEqOjDzMGQifLl5W0WnuJXMoYrbMfRT7irzsFHuChyi6Hv-Cqp-NJMYXRlESyHEcg" alt="Conexão decorativa" class="absolute top-1/4 -right-16 w-72 md:w-96 opacity-25 filter drop-shadow-[0_0_20px_rgba(204,255,0,0.3)] float-reverse pointer-events-none select-none">
+    
+    <!-- Conexão 3 (Base esquerda) -->
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL0XheJ0Id_elFGkg5eoVCWbx8h-aClowcmdtMjhmLzROdv4gh1U6m1M66yiVwRZYWrr32SLuaX32NLnFLEN-8cOZlOSDBnmBi8OXVOWlnF-DjWi3PIwe65hi9Jx8HeiFHYScF8H50ihWo5dtvOlJSvN-MHmwiYI1lFsXiPDrCiAw25YGUUUHUwzYckHODNmSNTGBGJdfbLpCdCkyu67mi9pjxcvlw3cDGB_VMbGlGy6-hry26nYJObJ7P99NoZKlXmg" alt="Conexão espiral" class="absolute -bottom-16 -left-12 w-64 md:w-80 opacity-20 filter drop-shadow-[0_0_15px_rgba(204,255,0,0.25)] float-slow pointer-events-none select-none">
+
+    <!-- Conexão 4 (Base direita) -->
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpJToX560w85Arwn2ylUtkSgd_tK1ZgRAXmUoGHFO6CiGSKs6vWSLy43OPazuDm4g8nQAm4lB5pVIP6RxNeQe9BMi5yM0vVYOPtQIesSxIIAmy0lJobPQCZTdHI7ZcwigKmer9GGbbjodBG5e7Lc4x7W63G8k1ueNCbjMgVHl9dCl9b-_5ZMjhVzJvCzb-HPGG9KuoYkdOa26xhqagxZuyMROCB7CJPt-9sbToz8HUMmb7yFZM30K5DRUlmWsJaz6Img" alt="Conexão curva" class="absolute -bottom-10 right-10 w-56 md:w-72 opacity-20 float-reverse pointer-events-none select-none">
+  </div>
+
+  <!-- Header Fixo da Marca -->
+  <header class="relative z-20 w-full px-6 py-5 md:px-12 flex items-center justify-between border-b border-white/5 backdrop-blur-md bg-[#07080a]/70">
+    <div class="flex items-center gap-4">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa55Iyv4l0qvWwTvoUHdNVqqTTZnixgvmnsCzFOuYL_N9RGVjLBXHMorHxeQUKX7ll6J0WP5Kf8AZgeL_Gc80WTg1tyu-boPMCwkZFdnTCMT-8arCoIYbNYrVntdxzEoFhwy0KumTu-TbOJYTZ5VJJm7rIXYqc7Cn6WjndGG2k7Sh2cLOymWxgM9ny8ddw88oRLAOG-1avSPcsDLX4n0HNsGSD4VrTjd3lmRhI6kucA6ACUvj4VdmSGsOv1BXLRDMb5A" alt="Nogma Logo" class="h-8 md:h-9 object-contain filter drop-shadow-[0_2px_10px_rgba(204,255,0,0.35)] cursor-pointer" onclick="goToWelcome()">
+      <span class="hidden sm:inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full bg-[#ccff00]/10 text-[#ccff00] border border-[#ccff00]/20">
+        Portal de Respostas
+      </span>
+    </div>
+
+    <!-- Indicador de Progresso / Status do Formulário (visível durante perguntas) -->
+    <div id="header-progress-wrap" class="hidden items-center gap-3">
+      <div class="text-right hidden sm:block">
+        <div class="text-xs font-medium text-gray-400">Progresso geral</div>
+        <div id="progress-percent" class="text-xs font-bold text-[#ccff00]">20% concluído</div>
+      </div>
+      <div class="w-32 md:w-44 h-2 bg-gray-800 rounded-full overflow-hidden border border-white/10 p-[1px]">
+        <div id="progress-bar" class="h-full bg-[#ccff00] rounded-full transition-all duration-500 ease-out" style="width: 20%"></div>
+      </div>
+    </div>
+
+    <!-- Isotipo N e Botão de Ajuda -->
+    <div class="flex items-center gap-3">
+      <button onclick="toggleHelpModal()" class="text-xs text-gray-400 hover:text-white px-3 py-1.5 rounded-lg border border-white/10 hover:border-white/20 transition-colors">
+        Ajuda
+      </button>
+      <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-1.5 shadow-inner">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj00n93YggbPwNl23by4_lGXPe6_hEm_464K8rE918OXN5Gbe-YFqjmjYMg2apicllo4zUBYnZp0WyEilgFAgkHq17mmjXvtj1T0Pdo59ERrsa5PMdc_0wkFmYhjEHJb_6_6zPScj2-5kzGNXe-sQJVMDr2KsEi0wHw4ZkokGULJ8TEmxj66xAFN6gM8wg86TFZQ0CWXMJaHWD-WB9yEIbJ9wcWoYmgafTe4uhViwN0FcVFBLovQhHtG0obdee2w4yNQ" alt="Nogma N Icon" class="w-full h-full object-contain">
+      </div>
+    </div>
+  </header>
+
+  <!-- Container Principal -->
+  <main class="relative z-10 flex-1 flex items-center justify-center p-4 md:p-8 max-w-5xl mx-auto w-full">
+
+    <!-- ================= TELA 1: CAPA DE BOAS-VINDAS ("Bem-vinda, Aloha") ================= -->
+    <section id="screen-welcome" class="w-full max-w-2xl text-center py-8 fade-enter">
+      <!-- Badge e Logo Decorativo -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-[#ccff00]/30 mb-8 backdrop-blur-sm">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmqL99i_Jt9NwbQ4dLJRo1xqFhqE0yYcrYd2iJT53cjcJCgFCXzOMGop4y4FdavT9LUrZ1y59zjZ33FXfgqjBO168dZAgFTM4tnjgCiEglLrjmucXrrxXjxaOMJ0HuiFlobs2cQ-wwrJAqgI95Wrw_4z8sGhPSPwXxnI8565GSV158qcAfM4VtHEKZE8GTOd_2-D9jdHjvG8Vi34Mo_55_rYigeztTj7StiOK0sKyizIej8fp_hm-OdTHo7n0hCSl44g" alt="Nogma" class="w-4 h-4 object-contain">
+        <span class="text-xs font-medium tracking-wider uppercase text-gray-300">Ambiente Exclusivo Nogma</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#ccff00] animate-ping"></span>
+      </div>
+
+      <!-- Título de Boas-Vindas solicitado expressamente -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-display text-white tracking-tight leading-tight">
+        Bem-vinda, <span class="text-[#ccff00] drop-shadow-[0_0_20px_rgba(204,255,0,0.45)] underline decoration-[#ccff00]/40 decoration-wavy">Aloha</span>
+      </h1>
+
+      <p class="mt-5 text-gray-400 text-base sm:text-lg max-w-xl mx-auto font-light leading-relaxed">
+        Preparamos uma série de perguntas pensadas para entender seus objetivos com clareza. Você poderá navegar pergunta por pergunta ou escolher livremente qual responder.
+      </p>
+
+      <!-- Cartão de informações breves sobre o formulário -->
+      <div class="grid grid-cols-3 gap-3 my-8 max-w-md mx-auto">
+        <div class="p-3.5 rounded-2xl bg-[#121418]/80 border border-white/5 text-center">
+          <span class="block text-2xl font-bold text-[#ccff00]">5</span>
+          <span class="text-[11px] text-gray-400 font-medium uppercase tracking-wider">Perguntas</span>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-[#121418]/80 border border-white/5 text-center">
+          <span class="block text-2xl font-bold text-white">~3</span>
+          <span class="text-[11px] text-gray-400 font-medium uppercase tracking-wider">Minutos</span>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-[#121418]/80 border border-white/5 text-center">
+          <span class="block text-2xl font-bold text-[#ccff00]">100%</span>
+          <span class="text-[11px] text-gray-400 font-medium uppercase tracking-wider">Seguro</span>
+        </div>
+      </div>
+
+      <!-- Botão de Início solicitado -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button onclick="startForm()" class="group relative px-9 py-4 rounded-2xl bg-[#ccff00] hover:bg-[#b8e600] text-black font-bold text-base md:text-lg transition-all duration-300 transform hover:-translate-y-0.5 neon-glow flex items-center gap-3">
+          <span>Começar o formulário</span>
+          <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="mt-6 flex items-center justify-center gap-2 text-xs text-gray-500">
+        <svg class="w-4 h-4 text-[#ccff00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        Pressione Enter ou clique para começar
+      </div>
+    </section>
+
+    <!-- ================= TELA 2: FORMULÁRIO INTERATIVO (Pergunta por Pergunta) ================= -->
+    <section id="screen-form" class="hidden w-full max-w-3xl fade-enter">
+      
+      <!-- Top Bar com Seletor Rápido de Questões & Tag da Questão -->
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-3 bg-[#121418]/90 border border-white/10 p-3.5 rounded-2xl backdrop-blur-md">
+        <!-- Indicador da Questão Atual -->
+        <div class="flex items-center gap-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ccff00] shadow-[0_0_8px_#ccff00]"></span>
+          <span id="question-badge" class="text-xs font-bold uppercase tracking-wider text-white">Questão 1 de 5</span>
+        </div>
+
+        <!-- Seletor Rápido de Questões Solicitado -->
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-gray-400 font-medium hidden md:inline">Escolher questão:</span>
+          <div class="flex items-center gap-1.5" id="questions-nav-pills">
+            <!-- Pílulas de acesso rápido geradas dinamicamente via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Principal da Questão (Estilo Google Docs Dark / Modern Tech) -->
+      <div class="relative bg-[#101216] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl">
+        
+        <!-- Pequena conexão sutil de marca no topo do cartão -->
+        <div class="absolute -top-3 right-8 px-3 py-1 bg-[#0a0b0d] border border-[#ccff00]/40 rounded-full flex items-center gap-1.5 shadow-sm">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0oKzVHeTDj1t8JK3S-MfKsLFZ5YlgsUnHSlXnH1Km45I1bGJ1hUZ37gsX_KbyP86Ty251rtM6DBI_xUBn5EqQKlN_8L4JVur0n72opg94nIdzoTB85C9Jbm2A_7qryZUDoUni_y9vv3--jQ3dJMGQ6sIBP-zXiTP2CxJxI_SEJMcN2LGet-PeCZ32R-Nuxe_L1bYcsdHcWKcfwdGxRLQYJhbHwziDyHhbNpyL-T5kL_c-zC8tfftGyrB1dlOD-sn3vw" alt="nogma icon" class="w-3 h-3 object-contain">
+          <span class="text-[10px] uppercase font-bold tracking-wider text-[#ccff00]">Nogma Flow</span>
+        </div>
+
+        <!-- Pergunta e Descrição -->
+        <div class="mb-8">
+          <div class="flex items-start gap-4">
+            <span id="q-number" class="text-3xl sm:text-4xl font-black font-display text-[#ccff00]/80">01.</span>
+            <div>
+              <h2 id="q-title" class="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight leading-snug">
+                Qual é o foco principal do seu projeto ou iniciativa atual?
+              </h2>
+              <p id="q-desc" class="text-sm sm:text-base text-gray-400 mt-2 font-light">
+                Descreva com detalhes para alinharmos os objetivos e entregáveis com exatidão.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caixa de Resposta (Tipo Google Docs / Inputs modernos com glow verde) -->
+        <div id="q-input-container" class="my-6">
+          <!-- O tipo de resposta (textarea ou opções) é populado via script -->
+        </div>
+
+        <!-- Linha divisória fina -->
+        <div class="h-px w-full bg-white/5 my-8"></div>
+
+        <!-- Barra de Ações: Voltar e Próximo (Solicitado expressamente) -->
+        <div class="flex items-center justify-between pt-2">
+          <!-- Botão Voltar -->
+          <button id="btn-prev" onclick="prevQuestion()" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white text-sm font-medium transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            <span>Voltar</span>
+          </button>
+
+          <!-- Status de auto-save / Atalho -->
+          <div class="hidden sm:flex items-center gap-2 text-xs text-gray-500">
+            <svg class="w-3.5 h-3.5 text-[#ccff00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span>Respostas salvas automaticamente</span>
+          </div>
+
+          <!-- Botão Próximo / Concluir -->
+          <button id="btn-next" onclick="nextQuestion()" class="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-[#ccff00] hover:bg-[#b8e600] text-black font-bold text-sm tracking-wide transition-all duration-200 transform active:scale-95 shadow-[0_0_15px_rgba(204,255,0,0.3)]">
+            <span id="btn-next-text">Próximo</span>
+            <svg id="btn-next-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Rodapé do Card com Atalho de Teclado -->
+      <div class="mt-4 flex items-center justify-between text-xs text-gray-500 px-3">
+        <span>Use <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-gray-300 font-mono">Tab</kbd> + <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-gray-300 font-mono">Enter</kbd> para avançar rápido</span>
+        <button onclick="goToWelcome()" class="hover:text-gray-300 underline transition-colors">Voltar para a Capa</button>
+      </div>
+
+    </section>
+
+    <!-- ================= TELA 3: TELA DE FINALIZAÇÃO (Após submeter) ================= -->
+    <section id="screen-success" class="hidden w-full max-w-xl text-center py-10 fade-enter">
+      <div class="w-20 h-20 mx-auto rounded-3xl bg-[#ccff00]/10 border border-[#ccff00]/30 flex items-center justify-center p-4 mb-6 shadow-[0_0_30px_rgba(204,255,0,0.25)]">
+        <svg class="w-10 h-10 text-[#ccff00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl font-bold font-display text-white">
+        Obrigado, Aloha!
+      </h2>
+      <p class="mt-3 text-gray-400 text-base max-w-md mx-auto">
+        Suas respostas foram registradas com sucesso no sistema Nogma. Nossa equipe entrará em contato para os próximos passos.
+      </p>
+
+      <div class="mt-8 p-5 rounded-2xl bg-[#121418] border border-white/10 text-left">
+        <div class="text-xs font-semibold uppercase text-gray-400 mb-3 flex items-center justify-between">
+          <span>Resumo enviado</span>
+          <span class="text-[#ccff00] text-[10px] bg-[#ccff00]/10 px-2 py-0.5 rounded">Completo</span>
+        </div>
+        <div class="space-y-2 text-xs text-gray-300" id="summary-container">
+          <!-- Preenchido dinamicamente -->
+        </div>
+      </div>
+
+      <div class="mt-8 flex justify-center gap-4">
+        <button onclick="restartForm()" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm transition-colors">
+          Editar respostas
+        </button>
+        <button onclick="goToWelcome()" class="px-6 py-3 rounded-xl bg-[#ccff00] hover:bg-[#b8e600] text-black font-bold text-sm transition-colors">
+          Voltar ao Início
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal de Ajuda Rápida -->
+  <div id="help-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-[#121418] border border-white/15 rounded-2xl max-w-md w-full p-6 relative">
+      <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#ccff00]"></span>
+        Como navegar no formulário
+      </h3>
+      <p class="text-sm text-gray-400 leading-relaxed mb-4">
+        Este formulário exibe uma pergunta por vez para maior foco e clareza. Você pode navegar livremente:
+      </p>
+      <ul class="text-xs text-gray-300 space-y-2.5 mb-6">
+        <li class="flex items-start gap-2">
+          <span class="text-[#ccff00] font-bold">1.</span>
+          <span><strong>Botões Próximo e Voltar:</strong> Avançam ou retornam na sequência natural.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-[#ccff00] font-bold">2.</span>
+          <span><strong>Seletor no topo (1, 2, 3...):</strong> Permite pular direto para a questão que preferir a qualquer momento.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-[#ccff00] font-bold">3.</span>
+          <span><strong>Salvamento:</strong> O que você digitar fica guardado na sessão.</span>
+        </li>
+      </ul>
+      <button onclick="toggleHelpModal()" class="w-full py-2.5 rounded-xl bg-[#ccff00] text-black font-bold text-sm hover:bg-[#b8e600]">
+        Entendi, continuar
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer Minimalista Nogma -->
+  <footer class="relative z-10 w-full px-6 py-4 border-t border-white/5 bg-[#07080a]/80 backdrop-blur-sm flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-500">
+    <div class="flex items-center gap-2">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCxVQR38f7tLGDgFF27IU0SF2DedkmIKVwbwKKpsvnQwTILQQnpFwpBZsOOBsLbvq5kKdxhdb3I3IDZZMAOIbSkJfpXBxi7GqUpoWCyW7s-0nbK3tmZix_kBOsR-rjCnM0jndUFLmvVq9zkPEcEjyF6wNmYuTCsSVhR5L5fcfFmJh5ydTWqwn2wV3XCzAfqTwXpZLadrnfZgGoHX-_-y9dkbffi40edIrZ3W9GX741KauO5tY717ZJQJ5VOlxQYj1WQQ" alt="Nogma" class="w-3.5 h-3.5 object-contain opacity-70">
+      <span>Nogma Design System &copy; 2025. Todos os direitos reservados.</span>
+    </div>
+    <div class="flex items-center gap-4 text-gray-400">
+      <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#ccff00]"></span> Sistema Ativo</span>
+      <span>Privacidade</span>
+      <span>Termos</span>
+    </div>
+  </footer>
+
+  <!-- Script da Lógica Interativa do Formulário -->
+  <script>
+    // Estrutura das Perguntas do Formulário estilo Google Docs
+    const questionsData = [
+      {
+        id: 1,
+        title: "Qual é o foco principal do seu projeto ou iniciativa atual?",
+        desc: "Compartilhe uma visão geral do que você busca construir ou transformar.",
+        placeholder: "Ex.: Desenvolver uma nova identidade visual e presença digital voltada para o público jovem...",
+        type: "textarea"
+      },
+      {
+        id: 2,
+        title: "Qual o prazo ou momento ideal para o lançamento?",
+        desc: "Selecione o horizonte temporal previsto para vermos o cronograma.",
+        type: "options",
+        options: [
+          "Imediato (em até 30 dias)",
+          "Médio prazo (1 a 3 meses)",
+          "Planejamento para o próximo semestre",
+          "Apenas exploratório no momento"
+        ]
+      },
+      {
+        id: 3,
+        title: "Qual estilo visual e tom melhor representam sua visão?",
+        desc: "Pense na atmosfera que melhor se conecta com a marca.",
+        type: "options",
+        options: [
+          "Minimalista, futurista e high-contrast (Dark & Lime)",
+          "Elegante, sóbrio e corporativo moderno",
+          "Vibrante, expressivo e com alto dinamismo visual",
+          "Outro direcionamento personalizado"
+        ]
+      },
+      {
+        id: 4,
+        title: "Quais são os principais canais ou pontos de contato prioritários?",
+        desc: "Onde seu público terá o maior impacto com este projeto?",
+        placeholder: "Ex.: Website institucional, aplicativo mobile, campanhas digitais e mídias sociais...",
+        type: "textarea"
+      },
+      {
+        id: 5,
+        title: "Existe algum detalhe, referência ou observação adicional?",
+        desc: "Fique à vontade para adicionar qualquer link, requisito técnico ou observação.",
+        placeholder: "Ex.: Gostaríamos de usar a paleta de conexões e verde-limão nos elementos interativos...",
+        type: "textarea"
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    const userAnswers = {};
+
+    // Inicialização das respostas vazias
+    questionsData.forEach(q => {
+      userAnswers[q.id] = "";
+    });
+
+    function startForm() {
+      document.getElementById('screen-welcome').classList.add('hidden');
+      document.getElementById('screen-form').classList.remove('hidden');
+      document.getElementById('header-progress-wrap').classList.remove('hidden');
+      document.getElementById('header-progress-wrap').classList.add('flex');
+      currentQuestionIndex = 0;
+      renderPills();
+      renderCurrentQuestion();
+    }
+
+    function goToWelcome() {
+      document.getElementById('screen-form').classList.add('hidden');
+      document.getElementById('screen-success').classList.add('hidden');
+      document.getElementById('screen-welcome').classList.remove('hidden');
+      document.getElementById('header-progress-wrap').classList.add('hidden');
+      document.getElementById('header-progress-wrap').classList.remove('flex');
+    }
+
+    function renderPills() {
+      const container = document.getElementById('questions-nav-pills');
+      container.innerHTML = '';
+      questionsData.forEach((q, idx) => {
+        const isCurrent = idx === currentQuestionIndex;
+        const isAnswered = Boolean(userAnswers[q.id] && userAnswers[q.id].trim() !== "");
+        
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.innerText = idx + 1;
+        btn.title = `Pular para Questão ${idx + 1}`;
+        btn.onclick = () => jumpToQuestion(idx);
+
+        let classes = "w-8 h-8 rounded-lg text-xs font-bold transition-all flex items-center justify-center ";
+        if (isCurrent) {
+          classes += "bg-[#ccff00] text-black shadow-[0_0_12px_rgba(204,255,0,0.5)] scale-105";
+        } else if (isAnswered) {
+          classes += "bg-white/10 text-[#ccff00] border border-[#ccff00]/40 hover:bg-white/20";
+        } else {
+          classes += "bg-white/5 text-gray-400 border border-white/10 hover:border-white/20 hover:text-white";
+        }
+        btn.className = classes;
+        container.appendChild(btn);
+      });
+    }
+
+    function jumpToQuestion(idx) {
+      saveCurrentResponse();
+      currentQuestionIndex = idx;
+      renderPills();
+      renderCurrentQuestion();
+    }
+
+    function saveCurrentResponse() {
+      const q = questionsData[currentQuestionIndex];
+      if (q.type === 'textarea') {
+        const input = document.getElementById(`input-${q.id}`);
+        if (input) {
+          userAnswers[q.id] = input.value;
+        }
+      }
+    }
+
+    function renderCurrentQuestion() {
+      const q = questionsData[currentQuestionIndex];
+      const total = questionsData.length;
+
+      // Badges e Textos
+      document.getElementById('question-badge').innerText = `Questão ${q.id} de ${total}`;
+      document.getElementById('q-number').innerText = `0${q.id}.`;
+      document.getElementById('q-title').innerText = q.title;
+      document.getElementById('q-desc').innerText = q.desc;
+
+      // Barra de progresso
+      const pct = Math.round(((currentQuestionIndex + 1) / total) * 100);
+      document.getElementById('progress-bar').style.width = `${pct}%`;
+      document.getElementById('progress-percent').innerText = `${pct}% concluído`;
+
+      // Renderizar Container de Input
+      const container = document.getElementById('q-input-container');
+      container.innerHTML = '';
+
+      if (q.type === 'textarea') {
+        const textarea = document.createElement('textarea');
+        textarea.id = `input-${q.id}`;
+        textarea.rows = 4;
+        textarea.className = "w-full p-4 rounded-2xl bg-[#0a0b0d] border border-white/15 text-white placeholder-gray-500 focus:outline-none focus:border-[#ccff00] focus:ring-1 focus:ring-[#ccff00] transition-all resize-none text-base font-normal";
+        textarea.placeholder = q.placeholder;
+        textarea.value = userAnswers[q.id] || "";
+        textarea.oninput = (e) => {
+          userAnswers[q.id] = e.target.value;
+          renderPills();
+        };
+        container.appendChild(textarea);
+        setTimeout(() => textarea.focus(), 80);
+      } else if (q.type === 'options') {
+        const group = document.createElement('div');
+        group.className = "grid grid-cols-1 sm:grid-cols-2 gap-3";
+
+        q.options.forEach((opt) => {
+          const isSelected = userAnswers[q.id] === opt;
+          const optCard = document.createElement('button');
+          optCard.type = 'button';
+          optCard.className = `p-4 rounded-2xl text-left border transition-all flex items-center justify-between ${
+            isSelected 
+              ? 'bg-[#ccff00]/10 border-[#ccff00] text-white shadow-[0_0_15px_rgba(204,255,0,0.2)]' 
+              : 'bg-[#0a0b0d] border-white/10 text-gray-300 hover:border-white/30 hover:bg-white/5'
+          }`;
+          
+          optCard.onclick = () => {
+            userAnswers[q.id] = opt;
+            renderPills();
+            renderCurrentQuestion();
+          };
+
+          optCard.innerHTML = `
+            <span class="text-sm font-medium ${isSelected ? 'text-[#ccff00]' : 'text-gray-200'}">${opt}</span>
+            <span class="w-5 h-5 rounded-full border ${isSelected ? 'border-[#ccff00] bg-[#ccff00] text-black' : 'border-white/20'} flex items-center justify-center text-xs">
+              ${isSelected ? '✓' : ''}
+            </span>
+          `;
+          group.appendChild(optCard);
+        });
+        container.appendChild(group);
+      }
+
+      // Atualizar Botões Próximo e Voltar
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNextText = document.getElementById('btn-next-text');
+      
+      btnPrev.disabled = (currentQuestionIndex === 0);
+
+      if (currentQuestionIndex === total - 1) {
+        btnNextText.innerText = "Finalizar e Enviar";
+      } else {
+        btnNextText.innerText = "Próximo";
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIndex > 0) {
+        saveCurrentResponse();
+        currentQuestionIndex--;
+        renderPills();
+        renderCurrentQuestion();
+      }
+    }
+
+    function nextQuestion() {
+      saveCurrentResponse();
+      const total = questionsData.length;
+
+      if (currentQuestionIndex < total - 1) {
+        currentQuestionIndex++;
+        renderPills();
+        renderCurrentQuestion();
+      } else {
+        // Conclusão do formulário
+        finishForm();
+      }
+    }
+
+    function finishForm() {
+      document.getElementById('screen-form').classList.add('hidden');
+      document.getElementById('header-progress-wrap').classList.add('hidden');
+      document.getElementById('header-progress-wrap').classList.remove('flex');
+      
+      const successScreen = document.getElementById('screen-success');
+      successScreen.classList.remove('hidden');
+
+      // Preenche sumário de respostas
+      const sumContainer = document.getElementById('summary-container');
+      sumContainer.innerHTML = '';
+      questionsData.forEach(q => {
+        const item = document.createElement('div');
+        item.className = "border-b border-white/5 pb-2";
+        const ans = userAnswers[q.id] || "Não respondida";
+        item.innerHTML = `
+          <div class="text-gray-400 font-medium">${q.id}. ${q.title}</div>
+          <div class="text-white font-semibold mt-0.5">${ans}</div>
+        `;
+        sumContainer.appendChild(item);
+      });
+    }
+
+    function restartForm() {
+      document.getElementById('screen-success').classList.add('hidden');
+      document.getElementById('screen-form').classList.remove('hidden');
+      document.getElementById('header-progress-wrap').classList.remove('hidden');
+      document.getElementById('header-progress-wrap').classList.add('flex');
+      currentQuestionIndex = 0;
+      renderPills();
+      renderCurrentQuestion();
+    }
+
+    function toggleHelpModal() {
+      const modal = document.getElementById('help-modal');
+      if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    // Suporte a atalhos de teclado (Enter para avançar quando focado em textarea com ctrl/cmd ou botão)
+    document.addEventListener('keydown', (e) => {
+      const formVisible = !document.getElementById('screen-form').classList.contains('hidden');
+      if (!formVisible) return;
+
+      if (e.key === 'ArrowRight' && (e.altKey || e.metaKey)) {
+        nextQuestion();
+      } else if (e.key === 'ArrowLeft' && (e.altKey || e.metaKey)) {
+        prevQuestion();
+      }
+    });
+  </script>
+</body>
+</html>
