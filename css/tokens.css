@@ -41,6 +41,7 @@
   /* Tipografia */
   --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: 'Unbounded', var(--font);
+  --font-hero: 'Agens', var(--font-display);
   --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   /* Movimento */
