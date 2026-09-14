@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07080a">
+  <meta name="robots" content="noindex">
+  <title>Aloha Recovery · Formulário Nogma</title>
+  <meta name="description" content="Formulário de onboarding do Agente de IA da Aloha Recovery, por Nogma.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+  <!-- Atmosfera: mesh + grão + curvas da marca -->
+  <div class="bg-art" aria-hidden="true">
+    <img class="art-1" src="assets/curva-1.svg" alt="">
+    <img class="art-2" src="assets/curva-2.svg" alt="">
+    <img class="art-3" src="assets/curva-3.svg" alt="">
+  </div>
+
+  <header class="header">
+    <div class="brand">
+      <a href="#" id="brand-home" aria-label="Início"><img src="assets/nogma-wordmark.png" alt="Nogma"></a>
+      <span class="badge"><span class="dot"></span>Portal de respostas</span>
+    </div>
+
+    <div class="progress-wrap" id="progress-wrap" hidden>
+      <div class="progress-label">
+        <small>Progresso geral</small>
+        <strong id="progress-text">0% concluído</strong>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progresso do formulário">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </div>
+
+    <div class="brand-n" title="Nogma"><img src="assets/nogma-n.png" alt=""></div>
+  </header>
+
+  <main id="app">
+
+    <!-- ========== CAPA ========== -->
+    <section data-screen="capa" class="screen hero stagger">
+      <span class="badge"><img src="assets/nogma-n.png" alt="" class="badge-n"> Ambiente exclusivo Nogma <span class="dot is-live"></span></span>
+
+      <h1 class="hero-title">Bem-vinda,<br><span class="hero-accent">Aloha</span></h1>
+
+      <p class="hero-sub">
+        Este formulário coleta as informações que vão alimentar o <strong>Agente de IA</strong> da Aloha Recovery.
+        Uma pergunta por vez, no seu ritmo — tudo fica salvo automaticamente.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat"><strong class="text-lime">25</strong><span>Perguntas</span></div>
+        <div class="stat"><strong>~15</strong><span>Minutos</span></div>
+        <div class="stat"><strong class="text-lime">Auto</strong><span>Salvamento</span></div>
+      </div>
+
+      <div class="hero-cta">
+        <button class="btn btn-primary btn-lg" id="btn-start">
+          <span id="btn-start-text">Começar o formulário</span>
+          <svg class="arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+        <button class="btn-link" id="btn-restart" hidden>Recomeçar do zero</button>
+      </div>
+
+      <p class="hero-hint"><kbd>Enter</kbd> para começar</p>
+    </section>
+
+    <!-- ========== IDENTIFICAÇÃO ========== -->
+    <section data-screen="identificacao" class="screen" hidden>
+      <div class="card ident-card">
+        <span class="card-tag"><img src="assets/nogma-n.png" alt=""> Antes de começar</span>
+        <h2 class="ident-title">Quem está respondendo?</h2>
+        <p class="ident-sub">Assim a Nogma sabe com quem falar sobre cada resposta.</p>
+
+        <form id="form-ident" novalidate>
+          <div class="field">
+            <label for="nome">Seu nome</label>
+            <input class="input" id="nome" name="nome" type="text" autocomplete="name" placeholder="Ex.: Ana Souza" maxlength="80" required>
+            <span class="error" id="nome-error"></span>
+          </div>
+          <div class="field">
+            <label for="cargo">Cargo / função na Aloha</label>
+            <input class="input" id="cargo" name="cargo" type="text" autocomplete="organization-title" placeholder="Ex.: Sócia, Gerente, Recepção" maxlength="80" required>
+            <span class="error" id="cargo-error"></span>
+          </div>
+          <div class="ident-actions">
+            <button type="button" class="btn btn-ghost" id="btn-ident-back">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              Voltar
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Ir para as perguntas
+              <svg class="arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ========== PERGUNTA ========== -->
+    <section data-screen="pergunta" class="screen" hidden>
+      <div class="q-topbar">
+        <div class="q-status">
+          <span class="dot-live"></span>
+          <span id="q-badge" class="mono">Questão 1 de 25</span>
+        </div>
+        <button class="btn btn-ghost btn-sm q-drawer-btn" id="btn-drawer" aria-haspopup="dialog" aria-controls="drawer">
+          Escolher questão
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <nav class="pills" id="pills" aria-label="Navegar entre questões"></nav>
+      </div>
+
+      <article class="card q-card" id="q-card">
+        <span class="card-tag"><img src="assets/nogma-n.png" alt=""> Nogma Flow</span>
+
+        <header class="q-head">
+          <span class="q-number" id="q-number">01.</span>
+          <div class="q-text">
+            <h2 class="q-title" id="q-title"></h2>
+            <p class="q-hint" id="q-hint" hidden></p>
+          </div>
+        </header>
+
+        <div class="q-body">
+          <label for="q-input" class="sr-only">Sua resposta</label>
+          <textarea class="q-input" id="q-input" rows="5" maxlength="4000" spellcheck="true" autocapitalize="sentences"></textarea>
+          <div class="q-meta">
+            <span class="q-saved" id="q-saved"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Salvo automaticamente</span>
+            <span class="q-count mono" id="q-count">0 / 4000</span>
+          </div>
+        </div>
+
+        <div class="q-divider"></div>
+
+        <footer class="q-actions">
+          <button class="btn btn-ghost" id="btn-prev">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            <span>Voltar</span>
+          </button>
+          <span class="q-shortcut"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> avança</span>
+          <button class="btn btn-primary" id="btn-next">
+            <span id="btn-next-text">Próximo</span>
+            <svg class="arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </footer>
+      </article>
+
+      <div class="q-foot">
+        <button class="btn-link" id="btn-review-jump">Ver revisão</button>
+        <button class="btn-link" id="btn-to-cover">Voltar para a capa</button>
+      </div>
+    </section>
+
+    <!-- ========== REVISÃO ========== -->
+    <section data-screen="revisao" class="screen" hidden>
+      <header class="review-head">
+        <span class="badge"><span class="dot"></span> Última etapa</span>
+        <h2 class="review-title">Revise suas <span class="text-lime">respostas</span></h2>
+        <p class="review-sub">Confira se está tudo certo antes de enviar. Você pode editar qualquer resposta.</p>
+        <div class="review-bar card">
+          <div class="review-bar-text">
+            <strong id="review-count" class="mono">0/25</strong>
+            <span>respondidas</span>
+          </div>
+          <div class="progress-track"><div class="progress-bar" id="review-progress"></div></div>
+          <span class="review-missing" id="review-missing" hidden></span>
+        </div>
+      </header>
+
+      <ol class="review-list" id="review-list"></ol>
+
+      <div class="review-actions card">
+        <div>
+          <strong id="review-cta-title">Tudo pronto?</strong>
+          <p id="review-cta-sub" class="text-muted">Ao enviar, suas respostas vão direto para a equipe Nogma.</p>
+        </div>
+        <button class="btn btn-primary btn-lg" id="btn-submit" disabled>
+          <span id="btn-submit-text">Enviar formulário</span>
+          <svg class="arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========== ENVIADO ========== -->
+    <section data-screen="enviado" class="screen done stagger" hidden>
+      <div class="done-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <h2 class="done-title">Obrigado, <span class="text-lime">Aloha</span>!</h2>
+      <p class="done-sub">Suas respostas foram enviadas com sucesso para a Nogma. Agora é com a gente: vamos usar tudo isso para dar vida ao seu Agente de IA.</p>
+      <div class="card done-summary" id="done-summary"></div>
+      <p class="done-foot">Pode fechar esta página. 💚</p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span class="brand-mini"><img src="assets/nogma-wordmark.png" alt="Nogma"> © 2026 Nogma. Todos os direitos reservados.</span>
+    <span>Formulário exclusivo · Aloha Recovery</span>
+  </footer>
+
+  <!-- Drawer mobile: escolher questão -->
+  <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Escolher questão" hidden>
+    <div class="drawer-backdrop" data-drawer-close></div>
+    <div class="drawer-sheet">
+      <div class="drawer-handle"></div>
+      <div class="drawer-head">
+        <strong>Ir para a questão</strong>
+        <button class="btn btn-ghost btn-sm" data-drawer-close>Fechar</button>
+      </div>
+      <ol class="drawer-list" id="drawer-list"></ol>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/form/app.js"></script>
+</body>
+</html>
